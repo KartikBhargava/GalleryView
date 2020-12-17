@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "543148372250",
+    "project_id": "galleryview-d1a97",
+    "storage_bucket": "galleryview-d1a97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:543148372250:android:5aa735b7d4558b0b3d3ca3",
+        "android_client_info": {
+          "package_name": "bhargava.kartik.gallerview"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "543148372250-phh1i3ppt57qn1g5h3vi9ommgr20r6vd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqcJRtRCWuYfRhdgnR1pe2LNUkKdcl-3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "543148372250-phh1i3ppt57qn1g5h3vi9ommgr20r6vd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
