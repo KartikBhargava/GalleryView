@@ -29,7 +29,7 @@ class SplashActivity : AppCompatActivity() {
                     startActivity(Intent(this@SplashActivity, GalleryViewActivity::class.java))
                     finish()
                 } else {
-                    startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
+                    startActivity(Intent(this@SplashActivity, GalleryViewActivity::class.java))
                     finish()
                 }
             }
