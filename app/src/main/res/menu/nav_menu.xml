@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/allPicturesFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_pictures_bottom_nav"
+        android:title="Pictures" />
+
+    <item
+        android:id="@+id/imageSearchFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_search_bottom_nav"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:enabled="true"
+        android:icon="@drawable/ic_settings_bottom_nav"
+        android:title="Settings" />
+
+</menu>

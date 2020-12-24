@@ -1,29 +1,25 @@
 package bhargava.kartik.gallerview.ui.gallerviewpackage.adapters
 
-import android.R
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import bhargava.kartik.gallerview.databinding.SingleItemRecyclerviewBinding
+import bhargava.kartik.gallerview.databinding.SingleItemRecyclerviewSearchBinding
 import bhargava.kartik.gallerview.dataclasses.PhotoItem
+import bhargava.kartik.gallerview.dataclasses.UnsplashPhoto
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-
-class UnsplashPhotoAdapter :
-    PagingDataAdapter<PhotoItem, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
-    private var lastPosition = -1
+class UnsplashPhotoSearchAdapter :
+    PagingDataAdapter<UnsplashPhoto, UnsplashPhotoSearchAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         val binding =
-            SingleItemRecyclerviewBinding.inflate(
+            SingleItemRecyclerviewSearchBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -40,30 +36,31 @@ class UnsplashPhotoAdapter :
         }
     }
 
-    class PhotoViewHolder(private val binding: SingleItemRecyclerviewBinding) :
+    class PhotoViewHolder(private val binding: SingleItemRecyclerviewSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(photo: PhotoItem) {
+        fun bind(photo: UnsplashPhoto) {
             binding.apply {
                 val bitmap: Bitmap? = BlurHashDecoder.decode(
-                    photo.blurHash,
-                    80,
-                    80
+                    photo.blur_hash,
+                    20,
+                    20
                 )
-                Glide.with(imageView.context).load(photo.urls?.regular).transition(
-                    DrawableTransitionOptions.withCrossFade()
-                )
+                Glide.with(itemView)
+                    .load(photo.urls.regular)
+                    .centerCrop()
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .placeholder(BitmapDrawable(bitmap)).into(imageView)
             }
         }
     }
 
     companion object {
-        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<PhotoItem>() {
-            override fun areItemsTheSame(oldItem: PhotoItem, newItem: PhotoItem) =
+        private val PHOTO_COMPARATOR = object : DiffUtil.ItemCallback<UnsplashPhoto>() {
+            override fun areItemsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) =
                 oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: PhotoItem, newItem: PhotoItem) =
+            override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto) =
                 oldItem == newItem
         }
     }

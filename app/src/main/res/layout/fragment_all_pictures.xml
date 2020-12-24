@@ -5,13 +5,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".ui.gallerviewpackage.fragments.AllPicturesFragment">
+
+
+    <TextView
+        android:id="@+id/tvNameUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_semibold"
+        android:text="Hello, Kartik"
+        android:textColor="#000000"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameUser"
         tools:listitem="@layout/single_item_recyclerview" />
 
     <ProgressBar
@@ -33,6 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@id/button_retry"
         android:layout_centerHorizontal="true"
+        android:fontFamily="@font/poppins"
         android:text="Results could not be loaded"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/recycler_view"
@@ -58,6 +78,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:fontFamily="@font/poppins"
         android:text="No results found for this query"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
