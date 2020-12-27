@@ -19,6 +19,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         buildConfigField("String", "UNSPLASH_ACCESS_KEY", "\"FyZriUPBrq7Av2ZSh2P63v3eN1n1YiXyeDT9IU14azM\"")
+        buildConfigField("String", "UNSPLASH_SECRET_KEY", "\"a8GxTgc4CO0sv7T1Yg7aPKUrirneQnt3z0iu0nq_Pqo\"")
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -110,6 +111,9 @@ dependencies {
 
     //Elastic View
     implementation 'com.github.armcha:ElasticView:0.2.0'
+
+    //Pretty time
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 
 }
 

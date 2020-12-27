@@ -3,6 +3,7 @@ package bhargava.kartik.gallerview.ui.gallerviewpackage
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -23,9 +24,17 @@ class GalleryViewActivity : AppCompatActivity() {
             this,
             R.layout.activity_gallery_view
         )
+        binding.lifecycleOwner = this
         val navController = findNavController(R.id.galleryViewActivityNavHostFragment)
         binding.bottomNavBar.setupWithNavController(navController)
-        binding.lifecycleOwner = this
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when (destination.id) {
+                R.id.previewFragment -> {
+                    binding.bottomNavBar.isVisible = false
+                }
+            }
+        }
+
     }
 
     override fun onSupportNavigateUp(): Boolean {

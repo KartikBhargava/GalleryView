@@ -1,7 +1,10 @@
 package bhargava.kartik.gallerview.dataclasses
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class User(
     @SerializedName("accepted_tos")
     val acceptedTos: Boolean?,
@@ -32,13 +35,14 @@ data class User(
     @SerializedName("total_photos")
     val totalPhotos: Int?,
     @SerializedName("twitter_username")
-    val twitterUsername: Any?,
+    val twitterUsername: String?,
     @SerializedName("updated_at")
     val updatedAt: String?,
     @SerializedName("username")
     val username: String?
-)
+): Parcelable
 
+@Parcelize
 data class Urls(
     @SerializedName("full")
     val full: String?,
@@ -50,8 +54,9 @@ data class Urls(
     val small: String?,
     @SerializedName("thumb")
     val thumb: String?
-)
+): Parcelable
 
+@Parcelize
 data class Sponsorship(
     @SerializedName("impression_urls")
     val impressionUrls: List<String>?,
@@ -61,8 +66,9 @@ data class Sponsorship(
     val tagline: String?,
     @SerializedName("tagline_url")
     val taglineUrl: String?
-)
+): Parcelable
 
+@Parcelize
 data class Sponsor(
     @SerializedName("accepted_tos")
     val acceptedTos: Boolean?,
@@ -73,13 +79,13 @@ data class Sponsor(
     @SerializedName("id")
     val id: String?,
     @SerializedName("instagram_username")
-    val instagramUsername: Any?,
+    val instagramUsername: String?,
     @SerializedName("last_name")
     val lastName: String?,
     @SerializedName("links")
     val links: LinksX?,
     @SerializedName("location")
-    val location: Any?,
+    val location: String?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("portfolio_url")
@@ -98,8 +104,9 @@ data class Sponsor(
     val updatedAt: String?,
     @SerializedName("username")
     val username: String?
-)
+): Parcelable
 
+@Parcelize
 data class ProfileImage(
     @SerializedName("large")
     val large: String?,
@@ -107,21 +114,18 @@ data class ProfileImage(
     val medium: String?,
     @SerializedName("small")
     val small: String?
-)
+): Parcelable
 
+@Parcelize
 data class PhotoItem(
     @SerializedName("alt_description")
     val altDescription: String?,
     @SerializedName("blur_hash")
     val blurHash: String?,
-    @SerializedName("categories")
-    val categories: List<Any>?,
     @SerializedName("color")
     val color: String?,
     @SerializedName("created_at")
     val createdAt: String?,
-    @SerializedName("current_user_collections")
-    val currentUserCollections: List<Any>?,
     @SerializedName("description")
     val description: String?,
     @SerializedName("height")
@@ -146,8 +150,9 @@ data class PhotoItem(
     val user: User?,
     @SerializedName("width")
     val width: Int?
-)
+) : Parcelable
 
+@Parcelize
 data class Links(
     @SerializedName("download")
     val download: String?,
@@ -157,8 +162,9 @@ data class Links(
     val html: String?,
     @SerializedName("self")
     val self: String?
-)
+): Parcelable
 
+@Parcelize
 data class LinksXX(
     @SerializedName("followers")
     val followers: String?,
@@ -174,8 +180,9 @@ data class LinksXX(
     val portfolio: String?,
     @SerializedName("self")
     val self: String?
-)
+): Parcelable
 
+@Parcelize
 data class LinksX(
     @SerializedName("followers")
     val followers: String?,
@@ -191,4 +198,4 @@ data class LinksX(
     val portfolio: String?,
     @SerializedName("self")
     val self: String?
-)
+) : Parcelable

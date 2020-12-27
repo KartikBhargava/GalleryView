@@ -9,15 +9,28 @@
         android:id="@+id/allPicturesFragment"
         tools:layout="@layout/fragment_all_pictures"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.AllPicturesFragment"
-        android:label="AllPicturesFragment" />
+        android:label="AllPicturesFragment" >
+        <action
+            android:id="@+id/action_allPicturesFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/imageSearchFragment"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.ImageSearchFragment"
         android:label="fragment_image_search"
-        tools:layout="@layout/fragment_image_search" />
+        tools:layout="@layout/fragment_image_search" >
+        <action
+            android:id="@+id/action_imageSearchFragment_to_previewFragment"
+            app:destination="@id/previewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/previewFragment"
+        android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.PreviewFragment"
+        android:label="fragment_previe"
+        tools:layout="@layout/fragment_previe" />
 </navigation>
