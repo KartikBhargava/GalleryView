@@ -1,9 +1,15 @@
 package bhargava.kartik.gallerview.ui.gallerviewpackage.fragments
 
+import android.app.DownloadManager
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import bhargava.kartik.gallerview.R
@@ -26,13 +32,14 @@ class PreviewFragment : Fragment(R.layout.fragment_previe) {
     private var _binding: FragmentPrevieBinding? = null
     private val binding get() = _binding!!
     private var photo: PhotoItem? = null
+    var mydownloadid: Long = 0
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentPrevieBinding.bind(view)
         photo = arguments?.getParcelable(ALL_PICTURES_FRAGMENT)
         binding.apply {
             Glide.with(requireContext()).load(photo?.urls?.regular)
-               .into(imageView)
+                .into(imageView)
             backIcon.setOnClickListener {
                 it.findNavController().popBackStack()
             }
@@ -74,10 +81,42 @@ class PreviewFragment : Fragment(R.layout.fragment_previe) {
                 }
                 paint.isUnderlineText = true
             }
+            downloadBtn.setOnClickListener {
+                downloadImage()
+            }
         }
     }
 
-    private fun shareImage() {
-
+    private fun downloadImage() {
+        val request = DownloadManager.Request(
+            Uri.parse("${photo?.links?.downloadLocation}")
+        )
+            .setTitle("Download Image")
+            .setDescription("Please wait while image is downloading...")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+            .setAllowedOverMetered(true)
+        request.setDestinationInExternalPublicDir(
+            requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                .toString(), "/Wallpro/${photo?.id}"
+        )
+        val dm = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        mydownloadid = dm.enqueue(request)
+        var br = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent?) {
+                val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                if (id == mydownloadid) {
+                    Toast.makeText(requireContext(), "Download Completed", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+        requireContext().registerReceiver(
+            br,
+            IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        )
     }
+
+    private fun shareImage() {
+    }
+
 }

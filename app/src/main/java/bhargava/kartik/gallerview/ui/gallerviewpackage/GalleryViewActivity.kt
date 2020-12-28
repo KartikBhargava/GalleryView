@@ -32,6 +32,9 @@ class GalleryViewActivity : AppCompatActivity() {
                 R.id.previewFragment -> {
                     binding.bottomNavBar.isVisible = false
                 }
+                else -> {
+                    binding.bottomNavBar.isVisible = true
+                }
             }
         }
 

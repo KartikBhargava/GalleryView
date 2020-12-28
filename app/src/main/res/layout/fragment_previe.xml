@@ -118,4 +118,16 @@
         app:layout_constraintTop_toBottomOf="@+id/tvDescription"
         tools:text="Dexcription hululululuu" />
 
+
+    <Button
+        android:id="@+id/downloadBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button_sp_health_my_bookings"
+        android:text="Donwload"
+        android:textAllCaps="false"
+        android:fontFamily="@font/poppins"
+        app:layout_constraintStart_toStartOf="@+id/textViewCreator"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCreator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

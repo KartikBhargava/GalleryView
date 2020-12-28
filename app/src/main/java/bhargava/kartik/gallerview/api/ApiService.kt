@@ -23,4 +23,8 @@ interface ApiService {
         @Query("page") page: Int,
         @Query("per_page") perPage: Int
     ): UnsplashResponse
+
+    @Headers("Accept-Version: v1", "Authorization: Client-ID ${BuildConfig.UNSPLASH_ACCESS_KEY}")
+    @GET("/photos/{id}/download")
+    suspend fun downloadPhoto()
 }
