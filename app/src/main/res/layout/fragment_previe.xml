@@ -125,9 +125,22 @@
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/custom_button_sp_health_my_bookings"
+        android:fontFamily="@font/poppins"
         android:text="Donwload"
         android:textAllCaps="false"
-        android:fontFamily="@font/poppins"
         app:layout_constraintStart_toStartOf="@+id/textViewCreator"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCreator" />
+
+    <Button
+        android:id="@+id/setWallpaperButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/custom_button_sp_health_my_bookings"
+        android:fontFamily="@font/poppins"
+        android:text="Set Wallpaper"
+        android:textAllCaps="false"
+        app:layout_constraintStart_toEndOf="@+id/downloadBtn"
         app:layout_constraintTop_toBottomOf="@+id/textViewCreator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

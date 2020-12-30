@@ -115,6 +115,9 @@ dependencies {
     //Pretty time
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 
+    //ads
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+
 }
 
 kapt {

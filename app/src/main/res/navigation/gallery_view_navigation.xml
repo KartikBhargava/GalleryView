@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/allPicturesFragment"
-        tools:layout="@layout/fragment_all_pictures"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.AllPicturesFragment"
-        android:label="AllPicturesFragment" >
+        android:label="AllPicturesFragment"
+        tools:layout="@layout/fragment_all_pictures">
         <action
             android:id="@+id/action_allPicturesFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
@@ -18,10 +18,11 @@
         android:id="@+id/imageSearchFragment"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.ImageSearchFragment"
         android:label="fragment_image_search"
-        tools:layout="@layout/fragment_image_search" >
+        tools:layout="@layout/fragment_image_search">
         <action
             android:id="@+id/action_imageSearchFragment_to_previewFragment"
             app:destination="@id/previewFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -32,5 +33,14 @@
         android:id="@+id/previewFragment"
         android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.PreviewFragment"
         android:label="fragment_previe"
-        tools:layout="@layout/fragment_previe" />
+        tools:layout="@layout/fragment_previe" >
+        <action
+            android:id="@+id/action_previewFragment_to_fullScreenImageFragment"
+            app:destination="@id/fullScreenImageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fullScreenImageFragment"
+        android:name="bhargava.kartik.gallerview.ui.gallerviewpackage.fragments.FullScreenImageFragment"
+        android:label="fragment_full_screen_image"
+        tools:layout="@layout/fragment_full_screen_image" />
 </navigation>

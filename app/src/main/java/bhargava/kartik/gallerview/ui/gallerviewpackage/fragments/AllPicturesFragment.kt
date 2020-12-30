@@ -17,12 +17,18 @@ import bhargava.kartik.gallerview.extras.Constants.ALL_PICTURES_FRAGMENT
 import bhargava.kartik.gallerview.ui.gallerviewpackage.adapters.UnsplashPhotoAdapter
 import bhargava.kartik.gallerview.ui.gallerviewpackage.adapters.UnsplashPhotoLoadStateAdapter
 import bhargava.kartik.gallerview.ui.gallerviewpackage.viewmodels.GalleryViewModel
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 
 class AllPicturesFragment : Fragment(R.layout.fragment_all_pictures) {
 
     private val viewModel: GalleryViewModel by activityViewModels()
     private var _binding: FragmentAllPicturesBinding? = null
     private val binding get() = _binding!!
+    private val mAppUnitId: String by lazy {
+
+        "ca-app-pub-8998944149281536~8274132140"
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -64,7 +70,12 @@ class AllPicturesFragment : Fragment(R.layout.fragment_all_pictures) {
                 }
             }
         }
+        loadBannerAd()
+    }
 
+    private fun loadBannerAd() {
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
     private fun onClickofItem(cardView: CardView, photoItem: PhotoItem) {
