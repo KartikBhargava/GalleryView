@@ -1,12 +1,12 @@
 package bhargava.kartik.gallerview.ui.gallerviewpackage.fragments
 
 import android.app.DownloadManager
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
@@ -24,8 +24,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.gms.ads.*
+import kotlinx.coroutines.*
 import org.ocpsoft.prettytime.PrettyTime
 import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
+import java.net.URL
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -100,7 +105,6 @@ class PreviewFragment : Fragment(R.layout.fragment_previe) {
             }
             setWallpaperButton.setOnClickListener {
                 loadInterstitialAd(mInterstitialAdUnitId)
-
             }
             imageView.setOnClickListener {
                 val fullScreenImageFragment = FullScreenImagePreview(
@@ -165,34 +169,71 @@ class PreviewFragment : Fragment(R.layout.fragment_previe) {
     }
 
     private fun downloadImage() {
-        val request = DownloadManager.Request(
-            Uri.parse("${photo?.links?.downloadLocation}")
-        )
-            .setTitle("Download Image")
-            .setDescription("Please wait while image is downloading...")
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-            .setAllowedOverMetered(true)
-
-
-        val dm = requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
-        mydownloadid = dm.enqueue(request)
-        val br = object : BroadcastReceiver() {
-            override fun onReceive(context: Context?, intent: Intent?) {
-                val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-                if (id == mydownloadid) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Download Completed + ${intent.data}",
-                        Toast.LENGTH_SHORT
-                    )
-                        .show()
-                }
+        binding.downloadBtn.isClickable = false
+        val result: Deferred<Bitmap?> = GlobalScope.async {
+            URL("${photo?.links?.download}").toBitmap()
+        }
+        GlobalScope.launch(Dispatchers.Main) {
+            val bitmap: Bitmap? = result.await()
+            bitmap?.apply {
+                val savedUri: Uri? = saveToInternalStorage(this)
+                Toast.makeText(requireContext(), savedUri.toString(), Toast.LENGTH_SHORT).show()
+                binding.downloadBtn.isClickable = true
             }
         }
-        requireContext().registerReceiver(
-            br,
-            IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+    }
+
+    private fun URL.toBitmap(): Bitmap? {
+        return try {
+            BitmapFactory.decodeStream(openStream())
+        } catch (e: IOException) {
+            null
+        }
+    }
+
+    private fun saveToInternalStorage(bitmap: Bitmap): Uri? {
+        // get the context wrapper instance
+        var outStream: FileOutputStream? = null
+        val dir = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM),
+            "Wallpro/"
         )
+        dir.mkdirs()
+        val fileName = String.format("%s_%d.jpg", "Image", System.currentTimeMillis())
+        val outFile = File(dir, fileName)
+        outStream = FileOutputStream(outFile)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+        outStream?.flush()
+        outStream?.close()
+        return Uri.parse(outFile.absolutePath)
+//        val wrapper = ContextWrapper(context)
+//
+//        // initializing a new file
+//        // bellow line return a directory in internal storage
+//        var file = wrapper.getDir("images", Context.MODE_PRIVATE)
+//
+//        // create a file to save the image
+//        file = File(file, "${UUID.randomUUID()}.jpg")
+//
+//        return try {
+//            // get the file output stream
+//            val stream: OutputStream = FileOutputStream(file)
+//
+//            // compress bitmap
+//            compress(Bitmap.CompressFormat.JPEG, 100, stream)
+//
+//            // flush the stream
+//            stream.flush()
+//
+//            // close stream
+//            stream.close()
+//
+//            // return the saved image uri
+//            Uri.parse(file.absolutePath)
+//        } catch (e: IOException) { // catch the exception
+//            e.printStackTrace()
+//            null
+//        }
     }
 
     private fun shareImage() {

@@ -96,7 +96,6 @@ dependencies {
 
     def lottieVersion = "3.4.2"
     implementation "com.airbnb.android:lottie:$lottieVersion"
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
     implementation('com.github.bumptech.glide:okhttp3-integration:4.9.0') {
