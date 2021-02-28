@@ -56,7 +56,7 @@ class UnsplashPhotoAdapter(
                     80
                 )
                 Glide.with(imageView.context).load(photo.urls?.regular).transition(
-                    DrawableTransitionOptions.withCrossFade()
+                        DrawableTransitionOptions.withCrossFade()
                 ).diskCacheStrategy(DiskCacheStrategy.DATA)
                     .placeholder(BitmapDrawable(bitmap)).into(imageView)
                 Glide.with(ivUserProfile.context).load(photo.user?.profileImage?.medium).transition(

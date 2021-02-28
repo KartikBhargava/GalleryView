@@ -25,10 +25,6 @@ class AllPicturesFragment : Fragment(R.layout.fragment_all_pictures) {
     private val viewModel: GalleryViewModel by activityViewModels()
     private var _binding: FragmentAllPicturesBinding? = null
     private val binding get() = _binding!!
-    private val mAppUnitId: String by lazy {
-
-        "ca-app-pub-8998944149281536~8274132140"
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +32,6 @@ class AllPicturesFragment : Fragment(R.layout.fragment_all_pictures) {
         val adapter = UnsplashPhotoAdapter { cardView: CardView, photoItem: PhotoItem ->
             onClickofItem(cardView, photoItem)
         }
-
         binding.apply {
             recyclerView.setHasFixedSize(true)
             recyclerView.layoutManager = LinearLayoutManager(requireContext())

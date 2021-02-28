@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.GallerView" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimary">#F33B5F</item>
         <item name="colorPrimaryVariant">#000000</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
